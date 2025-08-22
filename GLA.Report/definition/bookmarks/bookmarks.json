@@ -1,0 +1,60 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmarksMetadata/1.0.0/schema.json",
+  "items": [
+    {
+      "name": "e960a980e90d0c498358",
+      "displayName": "CA Visu Bookmark",
+      "children": [
+        "3c0127db5028de336b67",
+        "307f3a430e4365d25437"
+      ]
+    },
+    {
+      "name": "cb908567b1587ed2751a"
+    },
+    {
+      "name": "39741c77ee381bd6ee34"
+    },
+    {
+      "name": "7d1b10fd787a0e6e1cac"
+    },
+    {
+      "name": "2463acb7d136304d1d92"
+    },
+    {
+      "name": "d19ef3d963d613400c30"
+    },
+    {
+      "name": "cc5b049ec1db8e41874e"
+    },
+    {
+      "name": "80ae6509552b4e97804d"
+    },
+    {
+      "name": "3c2f34f1cc0b49044430"
+    },
+    {
+      "name": "f479a51653886a813a0a",
+      "displayName": "Achat Visu Bookmark",
+      "children": [
+        "f5e2484d7a52c96e7558",
+        "70ea0255056507babbb5"
+      ]
+    },
+    {
+      "name": "7534f4b4f37f174270d2"
+    },
+    {
+      "name": "66e82a38c027388414ca"
+    },
+    {
+      "name": "14e2017856d3aad1c90b"
+    },
+    {
+      "name": "9c502dd855e1e5f2a443"
+    },
+    {
+      "name": "3626809f55e98f086746"
+    }
+  ]
+}

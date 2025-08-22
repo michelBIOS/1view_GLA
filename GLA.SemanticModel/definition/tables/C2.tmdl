@@ -1,0 +1,54 @@
+table C2
+	lineageTag: 392af8bc-6089-4506-a9eb-7d955c8fcd64
+
+	column 'C2-Lib Court'
+		dataType: string
+		lineageTag: a7c5b832-050a-48a4-8b45-9a42f75350b4
+		summarizeBy: none
+		sourceColumn: C2-Lib Court
+
+		annotation SummarizationSetBy = Automatic
+
+	column C2
+		dataType: int64
+		formatString: 0
+		lineageTag: 786a094d-c804-485e-94b2-37dcf5cb4810
+		summarizeBy: none
+		sourceColumn: C2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Intitulé
+		dataType: string
+		lineageTag: c688f167-53df-4786-a711-1b9b731b5a2c
+		summarizeBy: none
+		sourceColumn: Intitulé
+
+		annotation SummarizationSetBy = Automatic
+
+	column C1
+		dataType: int64
+		formatString: 0
+		lineageTag: 3e1775e7-79cb-4335-a402-306f31733e0b
+		summarizeBy: none
+		sourceColumn: C1
+
+		annotation SummarizationSetBy = Automatic
+
+	partition C2 = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("lVbLjhs3EPwVYk9OIAbSvPe43nWCAAlg2IEvtg/UiJKJjGYmfAj6hfzFHrM5+wusH0s3izNarTeBc7JXLLK7q6q75/37q9VS3qrReNUJ7YU9PThtD9pdLejk6uOCACv5Ro+D9eJ0L/ohHLQKfLrCaSbf0J3QeeXFRovuQ1gus1oftW1NqxmYAZjLt2F90L03Q+/EBjjTUyxvnNN7OmF0DnQhX9vhYFwEU1a7LiJOD0itAKp8jBqHYIU17o+gHdfSflJ2p92Xe75Q4kIlX+1HG3ofERvtPWGVc2ZvuuntCtBa3uHYKu9V+4mPmYIN/TMq601rRhWLQYQa1xp5O+xHvsdsGGXc0PNxE4+zpfx5vx9+EKZvB0us6q6LUTOQna3S+ZNTkJ1l6XRvHNfYE6xvteP6GQWmszyh4nmw8QHQmhFhlDrlpliD+Ia3erTxvc4kCjKwlVURfS40skpiKA76jbxkoDOr5U2gUE4Yym1tOuPSm1vT03vm9JdNWmVgMmvkzZ5sN5kD+T65zfDE7LW8Oz2MlF1r0svP4BHgOt7IV/JX+jUGFqPV+/TfF1TllnjrjQ/093fxTg4F8mwqQ43jZL0e+TEKCuS5fNXLyD27gICb0HJ8/mttdMojhyh58R9o7kbqo3QBts9L+dYP7e9nuEF0yJZXyYKsCvWrNXYhOi1aRTo9sGCq9wvhhuCmdjXUlT5QB4gPV1/uHR7n+jRp4+dmfcolgzkuJM7rR2ntlaX+6zdsLIZA07yRvwyWO3QeFByZ4npixYvQC54IvVfGUmna7lXPv0cnU0mKwzN8d3roTw9WdRqlod68oTuBBtXfJJEInnMlcBwM5/tEKd1xIpVJbx8Go6ciydHkBEi64EZjwIacdfrsiU2xIb1p4KXmc2bXRzZABKyYX381ljYX1ozOnMJzdVAfb8CcxVL+GD1I7kcLF5gQxUredib5rYAri0y+1taxE+MUb9MEmjs0YuHNguYwJRJs5NENlBIRSJcUfD3YnaKoe86QD8MxplXAq0UhT3/yqD9faAcaUuTXAz9I5YZ1Z3gE4xocW5TyJzuEEYEcP0xYIGDaouL2XRuvYxuYA9UzjZvNxa+4BcsV9TxtvaWRZvxgYhFhlpNGeO81LsGExcWI5t0SOmWTqxkGFYtvUrE9v0QWnrKDhuVSviNyOXU0DuYLN22n2uiwCC+hbLmSL1XP1C2oT8mr3Xn0pSGZSJkXFsKVcEFJ26F33oZpWhInBKEtYg0v4hIGKHNa+Pwy/wRVy4KX+M7oeS+rA8/4GKtNEpgtu6iEoGUj3xHTiETTQ9s+9nkJ7sr/xd25OJQD9qqlvKERQu+/cCpsRbXMMYor0FWtplE8zUihj2RBKnbqpQrEVJl8+wyEAaCk4o3JDe5ELL8SXh1jPRUIqgp5i6+JqN7UawwAH1U5JdOecTv+tBmwhNVkwgp+r6r5xccLkAGwdlXPAH1s9ejjoknfAxWcXDXybvBp21GnCnW5MGOTHsW8qBIr0Ki6vtzuGEqKW4H7WNLqBCUuYF6u48zdgsbZhKnRK4hWk+W53y5Wk9iqtaWZQM8ueNE6Py/oWbvF041RQ+V6xU6aFmKcmfTBwefQts4en88bKmEgb1089+mpj2M3GD91fQ0h61nIOft/U7KGknWFDMxFm/I5hKzr8/ljJSMEOtYNf2LjI4zZ/lrGJxLWkLC+lr/x2NtqizyT+RgBPZolfVvs1A4vfU8HDXhtmkff7ZrXLqnCLT8NgO2WhnokJ95CwOZavjSdwk8U4eM/", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"C2-Lib Court" = _t, C2 = _t]),
+				    #"Inserted Text After Delimiter" = Table.AddColumn(Source, "Text After Delimiter", each Text.AfterDelimiter([#"C2-Lib Court"], "-"), type text),
+				    #"Renamed Columns" = Table.RenameColumns(#"Inserted Text After Delimiter",{{"Text After Delimiter", "Intitulé"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"C2-Lib Court", type text}, {"C2", Int64.Type}}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Changed Type",{"C2", "Intitulé", "C2-Lib Court"}),
+				    C1 = Table.AddColumn(#"Reordered Columns", "C1", each Number.From(Text.Start(Text.From([C2]), 1)), Int64.Type)
+				in
+				    C1
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

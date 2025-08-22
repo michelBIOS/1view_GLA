@@ -1,0 +1,57 @@
+relationship 8b302533-ddd3-4d14-bc17-fd0427188cc4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dim_Date.Date
+	toColumn: LocalDateTable_6e490a31-a957-46f6-ab08-079221e1b34c.Date
+
+relationship AutoDetected_5311e053-8da4-4f74-9737-c7f83157c9bc
+	fromColumn: C2.C1
+	toColumn: C1.C1
+
+relationship AutoDetected_3b15df84-a981-4c02-8f5d-8a850abb4cb6
+	fromColumn: C3.C2
+	toColumn: C2.C2
+
+relationship 1acd7762-4c92-4cb1-a56e-fc5c60f5081c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dim_Supplier.synchronized_at
+	toColumn: LocalDateTable_d4065de6-c79d-40ce-b1bc-2ffb50dd7dfb.Date
+
+relationship 4f9e5f5f-a280-4b30-9792-262e2b3b1541
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dim_Supplier.deleted_at
+	toColumn: LocalDateTable_17fefa79-930a-4317-9a43-f7bb83d0f48f.Date
+
+relationship 795b352f-d21f-4202-83b2-3647864e8ff7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dim_Customer.synchronized_at
+	toColumn: LocalDateTable_6e7cc737-29aa-4371-9066-990da6fe3ad8.Date
+
+relationship 675c89b2-c7cb-4e8e-b689-113781962679
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dim_Customer.deleted_at
+	toColumn: LocalDateTable_433991e1-3312-4941-8379-8940ceddb87b.Date
+
+relationship 78d7ada6-a6de-c374-2058-b02151db9072
+	fromColumn: 'Dynamic Logo'.id
+	toColumn: Dim_Companies.id
+
+relationship 277135ca-bf55-2905-a167-8566b34a67e0
+	fromColumn: GLA.Thirdparty_identifier
+	toColumn: Dim_Customer.id
+
+relationship 0c9bcc05-2c77-7e8d-be63-6e3e123b68b6
+	fromColumn: GLA.Thirdparty
+	toColumn: Dim_Supplier.id
+
+relationship 374b562a-74c6-c48a-bb45-45543b40f02f
+	fromColumn: GLA.Date
+	toColumn: Dim_Date.Date
+
+relationship 1041b89b-92db-b50b-2836-02976d6bb1ad
+	fromColumn: GLA.ID_Ste
+	toColumn: Dim_Companies.id
+
+relationship a4902df4-69fe-2e60-4cfb-27bbb89b9dbe
+	fromColumn: GLA.C3
+	toColumn: C3.C3
+

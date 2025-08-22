@@ -1,0 +1,7 @@
+role 'Ami Voyages'
+	modelPermission: read
+
+	tablePermission Dim_Companies = [id] == "21917322"
+
+	annotation PBI_Id = cba4209b0b8640c09d5d61a809390f11
+

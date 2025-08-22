@@ -1,0 +1,49 @@
+model Model
+	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-FR
+	dataAccessOptions
+		fastCombine
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup 'no loading'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'model tables'
+
+	annotation PBI_QueryGroupOrder = 1
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.146.1026.0 (25.08)+fb98ab832373de81dccd5c01cd96306a48477556
+
+annotation PBI_QueryOrder = ["GLA","Dim_Companies","C1","C2","C3","Dynamic Logo","Dim_Supplier","Dim_Customer","GLA_actual","GLA_Historique"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DateTableTemplate_1e855a0c-d942-457b-ad9e-0f384d3ad173
+ref table Dim_Date
+ref table LocalDateTable_6e490a31-a957-46f6-ab08-079221e1b34c
+ref table Dim_Companies
+ref table C1
+ref table C2
+ref table C3
+ref table 'Dynamic Logo'
+ref table Dim_Supplier
+ref table LocalDateTable_d4065de6-c79d-40ce-b1bc-2ffb50dd7dfb
+ref table LocalDateTable_17fefa79-930a-4317-9a43-f7bb83d0f48f
+ref table Dim_Customer
+ref table LocalDateTable_6e7cc737-29aa-4371-9066-990da6fe3ad8
+ref table LocalDateTable_433991e1-3312-4941-8379-8940ceddb87b
+ref table GLA
+
+ref role Interfast
+ref role 'United Tables France'
+ref role Kalite
+ref role 'Ami Voyages'
+ref role 88
+
+ref cultureInfo fr-FR
+

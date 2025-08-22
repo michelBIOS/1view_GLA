@@ -1,0 +1,46 @@
+table Dim_Companies
+	lineageTag: bf86ce6f-4b52-4a5c-9172-2d67c6de6637
+
+	column id
+		dataType: string
+		lineageTag: d236de29-f7f7-4c21-a074-6e8d280bd0a8
+		summarizeBy: none
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 77b1004d-b22d-428b-923e-d449213ea2d3
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Companies = m
+		mode: import
+		queryGroup: 'model tables'
+		source =
+				let
+				    Redshift = AmazonRedshift.Database(
+				        "pennylane-external.csqwamh5pldr.eu-west-1.redshift.amazonaws.com",
+				        "prod"
+				    ),
+				    Source = Value.NativeQuery(
+				        Redshift,
+				        "
+				        SELECT id, name
+				        FROM etl.companies
+				        WHERE id IN (
+				            21912624, 21915510, 22276641, 21917322, 21918011
+				        )
+				        "
+				    ),
+				    #"Type modifié" = Table.TransformColumnTypes(Source,{{"id", type text}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

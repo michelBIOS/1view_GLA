@@ -1,0 +1,57 @@
+table C3
+	lineageTag: 5a6c21f3-08e7-4076-867e-ee0e2b00325a
+
+	column 'C3 Lib-Court'
+		dataType: string
+		lineageTag: 273ede88-d9e3-4e14-858d-8fa13c987931
+		summarizeBy: none
+		sourceColumn: C3 Lib-Court
+
+		annotation SummarizationSetBy = Automatic
+
+	column C3
+		dataType: int64
+		formatString: 0
+		lineageTag: 6aa1a577-8ed5-4337-891c-060e92e25a66
+		summarizeBy: none
+		sourceColumn: C3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Intitulé
+		dataType: string
+		lineageTag: 299a9a26-ad24-480e-9878-e7d2eab88af6
+		summarizeBy: none
+		sourceColumn: Intitulé
+
+		annotation SummarizationSetBy = Automatic
+
+	column C2
+		dataType: int64
+		formatString: 0
+		lineageTag: d4f21a29-85b3-48d4-9eb7-e8ce653929f8
+		summarizeBy: none
+		sourceColumn: C2
+
+		annotation SummarizationSetBy = Automatic
+
+	partition C3 = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("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", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"C3 Lib-Court" = _t, C3 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"C3 Lib-Court", type text}, {"C3", Int64.Type}}),
+				    #"Removed Bottom Rows" = Table.RemoveLastN(#"Changed Type",1),
+				    #"Inserted Text After Delimiter" = Table.AddColumn(#"Removed Bottom Rows", "Text After Delimiter", each Text.AfterDelimiter([#"C3 Lib-Court"], " ", 1), type text),
+				    #"Renamed Columns" = Table.RenameColumns(#"Inserted Text After Delimiter",{{"Text After Delimiter", "Intitulé"}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns"," - ","-",Replacer.ReplaceText,{"C3 Lib-Court"}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Replaced Value",{"C3", "Intitulé", "C3 Lib-Court"}),
+				    C2 = Table.AddColumn(#"Reordered Columns", "C2", each Number.From(Text.Start(Text.From([C3]), 2)), Int64.Type)
+				
+				in
+				    C2
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

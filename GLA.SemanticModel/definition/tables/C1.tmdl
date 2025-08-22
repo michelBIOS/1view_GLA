@@ -1,0 +1,47 @@
+table C1
+	lineageTag: f7d378fe-32ff-42ec-a845-668d7181ba09
+
+	measure 'Sum Transaction' = sum('Transaction'[amount])
+		lineageTag: 3054681d-62b3-475b-844a-4060b638f5fc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column C1
+		dataType: int64
+		formatString: 0
+		lineageTag: 18a76219-b460-4e6f-91b9-9c94f084854a
+		summarizeBy: none
+		sourceColumn: C1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Libellé
+		dataType: string
+		lineageTag: f4be34c4-ddf6-44df-8c57-98d78a639bbe
+		summarizeBy: none
+		sourceColumn: Libellé
+
+		annotation SummarizationSetBy = Automatic
+
+	column C1-Lib
+		dataType: string
+		lineageTag: f29a121a-8373-4e9a-8afa-a174bb2469bf
+		summarizeBy: none
+		sourceColumn: C1-Lib
+
+		annotation SummarizationSetBy = Automatic
+
+	partition C1 = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("XY5NCsIwEIWvErJuFv0/gCt3gu5CFlGDDlpTJil4pZ6jF3MeliLu3vu+NzDW6lIXeudHyn56SyyN2porrK6E7YchnulJyWeKrySkMuofYlyLOuZ4eWBTG7VmqEbIiQLDNEZ9I0QLwcucIgemIK0V/QMw6vDk3fMt4L6TH9cC2Qs6cLxOlGF7o7bm3Ac=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [C1 = _t, Libellé = _t, #"C1-Lib" = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"C1", Int64.Type}, {"Libellé", type text}, {"C1-Lib", type text}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Changed Type","- ","-",Replacer.ReplaceText,{"C1-Lib"})
+				in
+				    #"Replaced Value"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

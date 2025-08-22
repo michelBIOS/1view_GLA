@@ -1,0 +1,77 @@
+table Dim_Date
+	lineageTag: fbe6011e-9d94-49aa-a24a-1fcec4fc20ff
+
+	column Date
+		formatString: dd/mm/yy
+		lineageTag: 417005f3-8af3-45cd-be08-9be6b3f12e9b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: 8b302533-ddd3-4d14-bc17-fd0427188cc4
+			defaultHierarchy: LocalDateTable_6e490a31-a957-46f6-ab08-079221e1b34c.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column Année
+		formatString: 0
+		lineageTag: 08faa9e5-7e08-4c43-a68a-6158bdbcf656
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Année]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestres
+		formatString: 0
+		lineageTag: 2004a58a-9889-401b-a8e6-a8dcce1e1973
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Trimestres]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mois
+		lineageTag: ce920748-6646-4789-857d-5db718931801
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mois]
+		sortByColumn: MoisNum
+
+		annotation SummarizationSetBy = Automatic
+
+	column MoisNum
+		formatString: 0
+		lineageTag: 7151b2ec-d6fe-4311-afb1-a147894458b0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MoisNum]
+
+		annotation SummarizationSetBy = User
+
+	column Aa
+		lineageTag: 53cc368d-acd4-4968-9fd5-eba84fa91716
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Aa]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Date = calculated
+		mode: import
+		source =
+				ADDCOLUMNS(
+				     CALENDARAUTO(),
+				    "Année",YEAR([Date]),
+				    "Trimestres",QUARTER([Date]),
+				    "Mois",FORMAT([Date],"mmm"),
+				    "MoisNum",MONTH([Date]),
+				    "Aa",RIGHT(YEAR([Date]),2)
+				)
+
+	annotation PBI_Id = 903eee4a8b814c918c00199c8a6d2770
+

@@ -1,0 +1,144 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/1.4.0/schema.json",
+  "displayName": "MobileFilterDown",
+  "name": "3c2f34f1cc0b49044430",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "6f24e78c99bb0380d231",
+      "76356c2e22e83e090450",
+      "51d5514bc20d9eb340d4"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "642b1be374a70d0963ac",
+    "filters": {
+      "byExpr": [
+        {
+          "name": "e0cd2d09e352efd4e383",
+          "type": "Categorical",
+          "filter": {
+            "Version": 2,
+            "From": [
+              {
+                "Name": "d",
+                "Entity": "Dim_Date",
+                "Type": 0
+              }
+            ],
+            "Where": [
+              {
+                "Condition": {
+                  "In": {
+                    "Expressions": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "d"
+                            }
+                          },
+                          "Property": "Année"
+                        }
+                      }
+                    ],
+                    "Values": [
+                      [
+                        {
+                          "Literal": {
+                            "Value": "2024L"
+                          }
+                        }
+                      ],
+                      [
+                        {
+                          "Literal": {
+                            "Value": "2025L"
+                          }
+                        }
+                      ],
+                      [
+                        {
+                          "Literal": {
+                            "Value": "2023L"
+                          }
+                        }
+                      ]
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          "expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Entity": "Dim_Date"
+                }
+              },
+              "Property": "Année"
+            }
+          },
+          "howCreated": 1
+        }
+      ]
+    },
+    "sections": {
+      "642b1be374a70d0963ac": {
+        "visualContainers": {},
+        "visualContainerGroups": {
+          "af86f41d3caeec93d889": {
+            "isHidden": false
+          },
+          "2ec9e4d80031ba98c6bf": {
+            "isHidden": false
+          },
+          "787894bff06f6308402c": {
+            "isHidden": false
+          },
+          "6403d980c09867b4c93a": {
+            "isHidden": false
+          },
+          "f22a0487e756e0508000": {
+            "isHidden": false
+          },
+          "c67beaf9a461a0d20307": {
+            "isHidden": false,
+            "children": {
+              "8804812f5348ec5e9148": {
+                "isHidden": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              },
+              "visible": {
+                "expr": {
+                  "Literal": {
+                    "Value": "true"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
