@@ -51,7 +51,3 @@ relationship 1041b89b-92db-b50b-2836-02976d6bb1ad
 	fromColumn: GLA.ID_Ste
 	toColumn: Dim_Companies.id
 
-relationship a4902df4-69fe-2e60-4cfb-27bbb89b9dbe
-	fromColumn: GLA.C3
-	toColumn: C3.C3
-

@@ -13,7 +13,7 @@ table C3
 		dataType: int64
 		formatString: 0
 		lineageTag: 6aa1a577-8ed5-4337-891c-060e92e25a66
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: C3
 
 		annotation SummarizationSetBy = Automatic

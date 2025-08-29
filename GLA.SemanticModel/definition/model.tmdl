@@ -17,9 +17,9 @@ queryGroup 'model tables'
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBIDesktopVersion = 2.146.1026.0 (25.08)+fb98ab832373de81dccd5c01cd96306a48477556
+annotation PBIDesktopVersion = 2.146.1254.0 (25.08)+791a7518fadc83da883d79322a2658aff57c8db3
 
-annotation PBI_QueryOrder = ["GLA","Dim_Companies","C1","C2","C3","Dynamic Logo","Dim_Supplier","Dim_Customer","GLA_actual","GLA_Historique"]
+annotation PBI_QueryOrder = ["GLA","Dim_Companies","C1","C2","C3","Dynamic Logo","Dim_Supplier","Dim_Customer"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
