@@ -1,0 +1,35 @@
+table Categories_Analytiques
+	lineageTag: 899f59ed-c74e-41c5-ae75-b7261045b97c
+
+	column Category
+		dataType: string
+		lineageTag: 5891f791-c7a5-4ccb-b19c-d6dd62570913
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Categories_Analytiques = m
+		mode: import
+		queryGroup: 'model tables'
+		source =
+				let
+				    Source = Sql.Databases("mhirzqqnk57e7anmxqvc3cldyq-ad6po2r4ekrefdnhlqka77jyjq.datawarehouse.fabric.microsoft.com"),
+				    GLA = Source{[Name="fact_1_GLA"]}[Data],
+				    Query = "
+				        SELECT *
+				        FROM dbo.fact_1_gla_actual_inline
+				        WHERE ID_Ste IN (21912624)
+				    ",
+				    NativeQuery = Value.NativeQuery(GLA, Query),
+				    #"Type modifié" = Table.TransformColumnTypes(NativeQuery,{{"Date", type date}, {"Line_identifier", type text}, {"Thirdparty_identifier", type text}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Type modifié",{"Category"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns"),
+				    #"Filtered Rows" = Table.SelectRows(#"Removed Duplicates", each ([Category] <> null))
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

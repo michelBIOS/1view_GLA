@@ -59,7 +59,7 @@ table GLA
 
 	column Date
 		dataType: dateTime
-		formatString: Long Date
+		formatString: Short Date
 		lineageTag: c0609411-83a2-40e2-8c70-676fd7450851
 		summarizeBy: none
 		sourceColumn: Date
@@ -170,16 +170,6 @@ table GLA
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column Deadline
-		dataType: double
-		lineageTag: 380aec40-764e-4ee9-89d7-1a969d818930
-		summarizeBy: sum
-		sourceColumn: Deadline
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	column Line_identifier
 		dataType: string
 		lineageTag: 7b42d71d-b255-4f7b-82d4-4b0086ddd882
@@ -249,9 +239,10 @@ table GLA
 				        WHERE ID_Ste IN (21912624)
 				    ",
 				    NativeQuery = Value.NativeQuery(GLA, Query),
-				    #"Type modifié" = Table.TransformColumnTypes(NativeQuery,{{"Date", type date}, {"Line_identifier", type text}, {"Thirdparty_identifier", type text}})
+				    #"Type modifié" = Table.TransformColumnTypes(NativeQuery,{{"Date", type date}, {"Line_identifier", type text}, {"Thirdparty_identifier", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Type modifié",{"Deadline"})
 				in
-				    #"Type modifié"
+				    #"Removed Columns"
 
 	annotation PBI_NavigationStepName = Navigation
 

@@ -10,7 +10,7 @@ table Dim_Date
 
 		variation Variation
 			isDefault
-			relationship: 8b302533-ddd3-4d14-bc17-fd0427188cc4
+			relationship: f88e8c3c-215e-4e89-aaef-6b49a0707239
 			defaultHierarchy: LocalDateTable_6e490a31-a957-46f6-ab08-079221e1b34c.'Hiérarchie de dates'
 
 		annotation SummarizationSetBy = Automatic
@@ -61,17 +61,196 @@ table Dim_Date
 
 		annotation SummarizationSetBy = Automatic
 
+	column AnneeFiscale
+		formatString: 0
+		lineageTag: e40fe3b7-1714-4327-91a6-affef5a6483e
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [AnneeFiscale]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnneeFiscaleLabel
+		lineageTag: 90e1cce0-94bf-46b4-8ac8-f55b8edaf810
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [AnneeFiscaleLabel]
+
+		annotation SummarizationSetBy = Automatic
+
+	column TrimestreFiscal
+		formatString: 0
+		lineageTag: a95be741-8df2-4361-a659-edf87a57553f
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [TrimestreFiscal]
+
+		annotation SummarizationSetBy = Automatic
+
+	column TrimestreFiscalLabel
+		lineageTag: 1d61e06a-f84f-4aa9-850a-8a06b3068ea4
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [TrimestreFiscalLabel]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MoisFiscal
+		formatString: 0
+		lineageTag: ec0f2364-f3d1-4b9b-9e07-e1f677ab7c32
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [MoisFiscal]
+
+		annotation SummarizationSetBy = Automatic
+
+	column SemestreFiscal
+		formatString: 0
+		lineageTag: c806d98d-4746-4a4f-80dc-811deba7df1c
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [SemestreFiscal]
+
+		annotation SummarizationSetBy = Automatic
+
+	column SemestreFiscalLabel
+		lineageTag: 03350ec8-e47f-46f8-8fbd-041d76c79bfc
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [SemestreFiscalLabel]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DebutAnneeFiscale
+		formatString: Short Date
+		lineageTag: e0b3bb38-6e6d-42b9-8c7d-d3cf303cb727
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [DebutAnneeFiscale]
+
+		variation Variation
+			isDefault
+			relationship: 51f50d3f-bcee-4d19-8b76-482a6a671637
+			defaultHierarchy: LocalDateTable_d5cc331e-7b80-46a1-9273-58b80db81056.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column FinAnneeFiscale
+		formatString: Short Date
+		lineageTag: 93631bcb-712a-4faf-b298-29bcfa9ac283
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [FinAnneeFiscale]
+
+		variation Variation
+			isDefault
+			relationship: d810d41e-d370-4250-895d-503e97a8c3ba
+			defaultHierarchy: LocalDateTable_c4c92428-bc04-40a2-b183-dfccc2b7e27a.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Dim_Date = calculated
 		mode: import
-		source =
+		source = ```
 				ADDCOLUMNS(
-				     CALENDARAUTO(),
-				    "Année",YEAR([Date]),
-				    "Trimestres",QUARTER([Date]),
-				    "Mois",FORMAT([Date],"mmm"),
-				    "MoisNum",MONTH([Date]),
-				    "Aa",RIGHT(YEAR([Date]),2)
+				    CALENDARAUTO(),
+				    "Année", YEAR([Date]),
+				    "Trimestres", QUARTER([Date]),
+				    "Mois", FORMAT([Date], "mmm"),
+				    "MoisNum", MONTH([Date]),
+				    "Aa", RIGHT(YEAR([Date]), 2),
+				    
+				    -- Colonnes pour l'année fiscale
+				    "AnneeFiscale", 
+				        IF(
+				            MONTH([Date]) >= 10,
+				            YEAR([Date]) + 1,
+				            YEAR([Date])
+				        ),
+				    
+				    "AnneeFiscaleLabel",
+				        IF(
+				            MONTH([Date]) >= 10,
+				            RIGHT(YEAR([Date]),2) & "/" & RIGHT(YEAR([Date]) + 1, 2),
+				            RIGHT(YEAR([Date]) - 1,2) & "/" & RIGHT(YEAR([Date]), 2)
+				        ),
+				    
+				    "TrimestreFiscal",
+				        SWITCH(
+				            TRUE(),
+				            MONTH([Date]) >= 10 && MONTH([Date]) <= 12, 1,
+				            MONTH([Date]) >= 1 && MONTH([Date]) <= 3, 2,
+				            MONTH([Date]) >= 4 && MONTH([Date]) <= 6, 3,
+				            MONTH([Date]) >= 7 && MONTH([Date]) <= 9, 4
+				        ),
+				    
+				    "TrimestreFiscalLabel",
+				        "T" & 
+				        SWITCH(
+				            TRUE(),
+				            MONTH([Date]) >= 10 && MONTH([Date]) <= 12, 1,
+				            MONTH([Date]) >= 1 && MONTH([Date]) <= 3, 2,
+				            MONTH([Date]) >= 4 && MONTH([Date]) <= 6, 3,
+				            MONTH([Date]) >= 7 && MONTH([Date]) <= 9, 4
+				        ) & " " &
+				        IF(
+				            MONTH([Date]) >= 10,
+				            RIGHT(YEAR([Date]),2) & "/" & RIGHT(YEAR([Date]) + 1, 2),
+				            RIGHT(YEAR([Date]) - 1,2) & "/" & RIGHT(YEAR([Date]), 2)
+				        ),
+				    
+				    "MoisFiscal",
+				        SWITCH(
+				            MONTH([Date]),
+				            10, 1,
+				            11, 2,
+				            12, 3,
+				            1, 4,
+				            2, 5,
+				            3, 6,
+				            4, 7,
+				            5, 8,
+				            6, 9,
+				            7, 10,
+				            8, 11,
+				            9, 12
+				        ),
+				    
+				    "SemestreFiscal",
+				        IF(
+				            MONTH([Date]) >= 10 || MONTH([Date]) <= 3,
+				            1,
+				            2
+				        ),
+				    
+				    "SemestreFiscalLabel",
+				        "S" & 
+				        IF(
+				            MONTH([Date]) >= 10 || MONTH([Date]) <= 3,
+				            1,
+				            2
+				        ) & " " &
+				        IF(
+				            MONTH([Date]) >= 10,
+				            RIGHT(YEAR([Date]),2) & "/" & RIGHT(YEAR([Date]) + 1, 2),
+				            RIGHT(YEAR([Date]) - 1,2) & "/" & RIGHT(YEAR([Date]), 2)
+				        ),
+				    
+				    "DebutAnneeFiscale",
+				        DATE(
+				            IF(MONTH([Date]) >= 10, YEAR([Date]), YEAR([Date]) - 1),
+				            10,
+				            1
+				        ),
+				    
+				    "FinAnneeFiscale",
+				        DATE(
+				            IF(MONTH([Date]) >= 10, YEAR([Date]) + 1, YEAR([Date])),
+				            9,
+				            30
+				        )
 				)
+				```
 
 	annotation PBI_Id = 903eee4a8b814c918c00199c8a6d2770
 

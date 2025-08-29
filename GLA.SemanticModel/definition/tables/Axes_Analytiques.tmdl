@@ -1,0 +1,35 @@
+table Axes_Analytiques
+	lineageTag: c543980e-9788-410e-ae6b-808994f693b1
+
+	column Analytical_axis
+		dataType: string
+		lineageTag: 72dcbb60-fe30-4edc-b2ed-0ae1a51adb35
+		summarizeBy: none
+		sourceColumn: Analytical_axis
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Axes_Analytiques = m
+		mode: import
+		queryGroup: 'model tables'
+		source =
+				let
+				    Source = Sql.Databases("mhirzqqnk57e7anmxqvc3cldyq-ad6po2r4ekrefdnhlqka77jyjq.datawarehouse.fabric.microsoft.com"),
+				    GLA = Source{[Name="fact_1_GLA"]}[Data],
+				    Query = "
+				        SELECT *
+				        FROM dbo.fact_1_gla_actual_inline
+				        WHERE ID_Ste IN (21912624)
+				    ",
+				    NativeQuery = Value.NativeQuery(GLA, Query),
+				    #"Type modifié" = Table.TransformColumnTypes(NativeQuery,{{"Date", type date}, {"Line_identifier", type text}, {"Thirdparty_identifier", type text}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Type modifié",{"Analytical_axis"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns"),
+				    #"Filtered Rows" = Table.SelectRows(#"Removed Duplicates", each ([Analytical_axis] <> null))
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

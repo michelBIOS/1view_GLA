@@ -1,0 +1,159 @@
+table Table_Periodes
+	lineageTag: 1b16331b-18eb-40fb-b2e1-0dcf461358c7
+
+	measure Filtre_Periode = ```
+			
+			VAR PeriodeSelectionnee = SELECTEDVALUE(Table_Periodes[PeriodeID])
+			VAR DateAujourdhui = TODAY()
+			VAR DebutExerciceCourant = DATE(IF(MONTH(DateAujourdhui) >= 10, YEAR(DateAujourdhui), YEAR(DateAujourdhui) - 1), 10, 1)
+			VAR FinExerciceCourant = DATE(IF(MONTH(DateAujourdhui) >= 10, YEAR(DateAujourdhui) + 1, YEAR(DateAujourdhui)), 9, 30)
+			VAR DebutExercicePrecedent = DATE(YEAR(DebutExerciceCourant) - 1, 10, 1)
+			VAR FinExercicePrecedent = DATE(YEAR(FinExerciceCourant) - 1, 9, 30)
+			
+			RETURN
+			SWITCH(
+			    PeriodeSelectionnee,
+			    
+			    -- Exercice courant
+			    1, IF(
+			        MIN(Dim_Date[Date]) >= DebutExerciceCourant && 
+			        MAX(Dim_Date[Date]) <= FinExerciceCourant,
+			        1,
+			        0
+			    ),
+			    
+			    -- Exercice précédent  
+			    2, IF(
+			        MIN(Dim_Date[Date]) >= DebutExercicePrecedent && 
+			        MAX(Dim_Date[Date]) <= FinExercicePrecedent,
+			        1,
+			        0
+			    ),
+			    
+			    -- Mois en cours
+			    3, IF(
+			        MONTH(MIN(Dim_Date[Date])) = MONTH(DateAujourdhui) &&
+			        YEAR(MIN(Dim_Date[Date])) = YEAR(DateAujourdhui),
+			        1,
+			        0
+			    ),
+			    
+			    -- 7 derniers jours
+			    4, IF(
+			        MIN(Dim_Date[Date]) >= DateAujourdhui - 7 &&
+			        MAX(Dim_Date[Date]) <= DateAujourdhui,
+			        1,
+			        0
+			    ),
+			    
+			    -- Mois dernier
+			    5, IF(
+			        MIN(Dim_Date[Date]) >= EOMONTH(DateAujourdhui, -2) + 1 &&
+			        MAX(Dim_Date[Date]) <= EOMONTH(DateAujourdhui, -1),
+			        1,
+			        0
+			    ),
+			    
+			    -- Année en cours
+			    6, IF(
+			        YEAR(MIN(Dim_Date[Date])) = YEAR(DateAujourdhui),
+			        1,
+			        0
+			    ),
+			    
+			    -- Année dernière
+			    7, IF(
+			        YEAR(MIN(Dim_Date[Date])) = YEAR(DateAujourdhui) - 1,
+			        1,
+			        0
+			    ),
+			    
+			    -- Par défaut, tout afficher
+			    1
+			)
+			```
+		formatString: 0
+		lineageTag: 8c152f23-c2fd-4d41-8d43-fb76f984b07d
+
+	measure Description_Periode_Dynamique = ```
+			
+			VAR PeriodeSelectionnee = SELECTEDVALUE(Table_Periodes[PeriodeID])
+			VAR DateAujourdhui = TODAY()
+			VAR DebutExerciceCourant = DATE(IF(MONTH(DateAujourdhui) >= 10, YEAR(DateAujourdhui), YEAR(DateAujourdhui) - 1), 10, 1)
+			VAR FinExerciceCourant = DATE(IF(MONTH(DateAujourdhui) >= 10, YEAR(DateAujourdhui) + 1, YEAR(DateAujourdhui)), 9, 30)
+			VAR DebutExercicePrecedent = DATE(YEAR(DebutExerciceCourant) - 1, 10, 1)
+			VAR FinExercicePrecedent = DATE(YEAR(FinExerciceCourant) - 1, 9, 30)
+			
+			RETURN
+			SWITCH(
+			    PeriodeSelectionnee,
+			    1, FORMAT(DebutExerciceCourant, "dd/mm/yyyy") & " - " & FORMAT(FinExerciceCourant, "dd/mm/yyyy"),
+			    2, FORMAT(DebutExercicePrecedent, "dd/mm/yyyy") & " - " & FORMAT(FinExercicePrecedent, "dd/mm/yyyy"),
+			    3, "Du " & FORMAT(EOMONTH(DateAujourdhui, -1) + 1, "dd/mm/yyyy") & " au " & FORMAT(EOMONTH(DateAujourdhui, 0), "dd/mm/yyyy"),
+			    4, "Du " & FORMAT(DateAujourdhui - 6, "dd/mm/yyyy") & " au " & FORMAT(DateAujourdhui, "dd/mm/yyyy"),
+			    5, "Du " & FORMAT(EOMONTH(DateAujourdhui, -2) + 1, "dd/mm/yyyy") & " au " & FORMAT(EOMONTH(DateAujourdhui, -1), "dd/mm/yyyy"),
+			    6, "Année " & YEAR(DateAujourdhui),
+			    7, "Année " & (YEAR(DateAujourdhui) - 1),
+			    ""
+			)
+			
+			```
+		lineageTag: a1b65ffa-3d4d-4432-a289-ec4d8199fc80
+
+	column PeriodeID
+		formatString: 0
+		lineageTag: 39f0774d-8fb2-4bfd-9117-306f15bd9da0
+		summarizeBy: count
+		isNameInferred
+		sourceColumn: [PeriodeID]
+
+		annotation SummarizationSetBy = Automatic
+
+	column PeriodeNom
+		lineageTag: 8b734c53-3024-461d-9b43-c69632f89987
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [PeriodeNom]
+		sortByColumn: PeriodeID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PeriodeDescription
+		lineageTag: 6e031ece-d989-4d93-b1ac-7a2933388c13
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [PeriodeDescription]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordre
+		formatString: 0
+		lineageTag: cf9f660b-c926-4902-9a48-33885cec5eb2
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Ordre]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Table_Periodes = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "PeriodeID", INTEGER,
+				    "PeriodeNom", STRING,
+				    "PeriodeDescription", STRING,
+				    "Ordre", INTEGER,
+				    {
+				        {1, "Current Fiscal Year", "01/10/24 to 30/09/25", 1},
+				        {2, "Previous Fiscal Year", "01/10/23 to 30/09/24", 2},
+				        {3, "Current Month", "", 3},
+				        {4, "7 Last Days", "", 4},
+				        {5, "Last Month", "", 5},
+				        {6, "Current Year", "2025", 6},
+				        {7, "Last Year", "2024", 7}
+				    }
+				)
+
+	annotation PBI_Id = c6550857dcf342159e6aa6580855c815
+

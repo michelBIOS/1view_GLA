@@ -19,13 +19,12 @@ annotation __PBI_TimeIntelligenceEnabled = 1
 
 annotation PBIDesktopVersion = 2.146.1254.0 (25.08)+791a7518fadc83da883d79322a2658aff57c8db3
 
-annotation PBI_QueryOrder = ["GLA","Dim_Companies","C1","C2","C3","Dynamic Logo","Dim_Supplier","Dim_Customer"]
+annotation PBI_QueryOrder = ["GLA","Dim_Companies","C1","C2","C3","Dynamic Logo","Dim_Supplier","Dim_Customer","Axes_Analytiques","Categories_Analytiques"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
 ref table DateTableTemplate_1e855a0c-d942-457b-ad9e-0f384d3ad173
 ref table Dim_Date
-ref table LocalDateTable_6e490a31-a957-46f6-ab08-079221e1b34c
 ref table Dim_Companies
 ref table C1
 ref table C2
@@ -38,6 +37,12 @@ ref table Dim_Customer
 ref table LocalDateTable_6e7cc737-29aa-4371-9066-990da6fe3ad8
 ref table LocalDateTable_433991e1-3312-4941-8379-8940ceddb87b
 ref table GLA
+ref table Axes_Analytiques
+ref table Categories_Analytiques
+ref table LocalDateTable_6e490a31-a957-46f6-ab08-079221e1b34c
+ref table LocalDateTable_d5cc331e-7b80-46a1-9273-58b80db81056
+ref table LocalDateTable_c4c92428-bc04-40a2-b183-dfccc2b7e27a
+ref table Table_Periodes
 
 ref role Interfast
 ref role 'United Tables France'

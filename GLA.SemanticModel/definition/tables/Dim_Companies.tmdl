@@ -36,9 +36,10 @@ table Dim_Companies
 				        )
 				        "
 				    ),
-				    #"Type modifié" = Table.TransformColumnTypes(Source,{{"id", type text}})
+				    #"Type modifié" = Table.TransformColumnTypes(Source,{{"id", type text}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Type modifié", each ([id] = "21912624"))
 				in
-				    #"Type modifié"
+				    #"Filtered Rows"
 
 	annotation PBI_NavigationStepName = Navigation
 
